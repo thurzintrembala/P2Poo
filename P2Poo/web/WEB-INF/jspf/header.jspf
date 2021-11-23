@@ -1,0 +1,25 @@
+<%-- any content can be specified here e.g.: --%>
+
+<%@ page pageEncoding="UTF-8" %>
+<h1>ArthurAndradeTasksApp</h1>
+
+<%String sessionName = (String) session.getAttribute("login");%>
+
+<form method="post">
+    <%if (request.getParameter("loginBotao") != null) {
+    session.setAttribute("login", request.getParameter("login"));}%>
+    <%if (sessionName == null) {%>
+
+    <input type="text" name="login" placeholder="Entre com seu nome" required/>
+    <input type ="submit" name="loginBotao" value="Login"/>
+    <%} else {%>
+    Bem vindo, <%=sessionName%>
+    <input type="submit" name="Sair" value="Sair"/>
+    <%if (request.getParameter("Sair") != null) {
+    session.removeAttribute("login");
+    response.sendRedirect(request.getRequestURI());
+    }%>
+    
+    
+    <%}%>
+</form>
